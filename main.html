@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --main-bg: #f5f5f5;
+            --main-text: #000
+        }
+
+        [data-theme="dark"] {
+            --main-bg: rgb(45, 37, 50);
+            --main-text: #fff
+        }
+
+        body {
+            background-color: var(--main-bg);
+        }
+
+        h1 {
+            color: var(--main-text);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Hello theme</h1>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+
+    <script>
+        const body = document.querySelector('body');
+        const initialTheme = 'light';
+
+        const setTheme = (theme) => {
+            localStorage.setItem('theme', theme);
+            body.setAttribute('data-theme', theme);
+        }
+
+        const toggleTheme = () => {
+            const activeTheme = localStorage.getItem('theme');
+            if (activeTheme === 'light') {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+
+        const setThemeOnInit = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                body.setAttribute('data-theme', savedTheme);
+            } else {
+                setTheme(initialTheme);
+            }
+        }
+
+        setThemeOnInit();
+    </script>
+
+</body>
+
+</html>
